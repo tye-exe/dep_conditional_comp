@@ -4,6 +4,18 @@ dependencies is available to the dependent crate.
 
 ### Observed behaviour
 Cargo does not compile code annotated with `cfg(test)` when running a dependent crates tests.
+The following error is produced:
+```
+  Compiling test_crate v0.1.0 (<path_to_crate>/test_crate)
+error[E0425]: cannot find value `Conditional` in crate `conditional`
+ --> test_crate/src/main.rs:8:22
+  |
+8 |         conditional::Conditional;
+  |                      ^^^^^^^^^^^ not found in `conditional`
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `test_crate` (bin "test_crate" test) due to 1 previous error
+```
 
 ### Recreation
 To make this error occur, run `cargo test` and the error will be produced.
